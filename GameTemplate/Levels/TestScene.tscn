@@ -1,0 +1,117 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Levels/Level.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Fonts/m5x7_64.tres" type="DynamicFont" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://Levels/playere.gd" type="Script" id=4]
+[ext_resource path="res://Assets/Images/BackGround.png" type="Texture" id=5]
+[ext_resource path="res://Levels/Player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Images/Earth.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Fonts/m5x7_16.tres" type="DynamicFont" id=8]
+[ext_resource path="res://Levels/Enemy.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Sounds/TestBeep.wav" type="AudioStream" id=10]
+
+[node name="Level" type="Node2D"]
+script = ExtResource( 1 )
+Next_Scene = "res://TitleScreen/MainMenu.tscn"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -100
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 202.0
+margin_bottom = 48.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.662745, 1, 0.537255, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer"]
+modulate = Color( 0.286275, 0.215686, 0.215686, 1 )
+margin_left = -10.2885
+margin_top = 142.431
+margin_right = 325.712
+margin_bottom = 191.431
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="CanvasLayer"]
+visible = false
+position = Vector2( 156.129, 131.574 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+script = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 107.123
+margin_top = 97.9239
+margin_right = 147.123
+margin_bottom = 111.924
+custom_fonts/font = ExtResource( 8 )
+text = "SHOOT!"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 267.072, 43.2974 )
+scale = Vector2( 2.68046, 2.68046 )
+texture = ExtResource( 7 )
+
+[node name="Button" type="Button" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 259.57
+margin_top = 154.857
+margin_right = 312.57
+margin_bottom = 173.857
+custom_fonts/font = ExtResource( 2 )
+text = "GO BACK"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button2" type="Button" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 201.034
+margin_top = 154.857
+margin_right = 254.034
+margin_bottom = 173.857
+focus_mode = 0
+custom_fonts/font = ExtResource( 2 )
+enabled_focus_mode = 0
+text = "RESET"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player" parent="." instance=ExtResource( 6 )]
+position = Vector2( 93.7614, 132.874 )
+
+[node name="Enemy" parent="." instance=ExtResource( 9 )]
+position = Vector2( 160.411, 132.985 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_Button2_pressed"]
